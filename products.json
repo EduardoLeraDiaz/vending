@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "name":"Water 1l",
+      "selector":"water",
+      "price": 0.65,
+      "stock": 10
+    },
+    {
+      "name":"Juice 33Cl",
+      "selector":"juice",
+      "price": 1,
+      "stock": 10
+    },
+    {
+      "name":"Soda 33Cl",
+      "selector":"soda",
+      "price": 1.5,
+      "stock": 10
+    }
+  ]
+}

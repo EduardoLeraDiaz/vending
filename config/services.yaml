@@ -13,12 +13,27 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+    bus_handlers:
+        namespace: App\
+        resource: '../src/*/Application/{Command,Query}/*Handler.php'
+        tags:
+            - { name: tactician.handler, typehints: true }
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    console:
+        namespace: App\
+        resource: '../src/*/Infrastructure/Console/*Command.php'
+
+    repos:
+        namespace: App\
+        resource: '../src/*/Infrastructure/Doctrine'
+
+    domain_services:
+        namespace: App\
+        resource: '../src/*/Domain/Service'
+
+    App\Vending\Domain\Repository\BalanceRepositoryInterface: '@App\Vending\Infrastructure\Doctrine\DoctrineBalanceRepository'
+    App\Vending\Domain\Repository\ProductRepositoryInterface: '@App\Vending\Infrastructure\Doctrine\DoctrineProductRepository'
+    App\Vending\Domain\Repository\AvailableCoinsRepositoryInterface: '@App\Vending\Infrastructure\Doctrine\DoctrineAvailableCoinsRepository'
+
+
+
